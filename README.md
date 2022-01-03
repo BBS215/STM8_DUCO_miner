@@ -18,3 +18,5 @@ Connect power to 3.3V or 5V or USB, UART TX to PD6, RX to PD5. LED connected to 
 How to enable UART on Raspberry Pi 4/3/Zero W: https://di-marco.net/blog/it/2020-06-06-raspberry_pi_3_4_and_0_w_serial_port_usage/<br>
 
 ![RasPi_connect](https://user-images.githubusercontent.com/33000089/147982746-e581bddf-83df-4fcf-b022-40b286468f01.png)
+
+![PL2303HX_connect](https://user-images.githubusercontent.com/33000089/147985176-451eb2e6-d214-4649-9d42-6ca4f2a50795.png)
