@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="STM8_DUCO_miner" />
+		<Option pch_mode="2" />
+		<Option compiler="sdcc" />
+		<Build>
+			<Target title="Release">
+				<Option output="bin/Release/STM8_DUCO_miner.hex" prefix_auto="1" extension_auto="0" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="sdcc" />
+				<Compiler>
+					<Add option="--opt-code-size" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-mstm8" />
+			<Add option="--std-c99" />
+			<Add option="-DSTM8S003" />
+			<Add directory="STM8S_StdPeriph_Driver/inc" />
+			<Add directory="." />
+			<Add directory="sha1" />
+		</Compiler>
+		<Unit filename="STM8S_StdPeriph_Driver/inc/private/stm8s_awu_private.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/private/stm8s_can_private.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/private/stm8s_clk_private.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/private/stm8s_flash_private.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/private/stm8s_i2c_private.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/private/stm8s_tim1_private.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/private/stm8s_tim2_private.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/private/stm8s_tim3_private.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/private/stm8s_tim5_private.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/private/stm8s_wwdg_private.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_adc1.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_adc2.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_awu.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_beep.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_can.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_clk.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_exti.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_flash.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_gpio.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_i2c.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_itc.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_iwdg.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_rst.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_spi.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_tim1.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_tim2.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_tim3.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_tim4.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_tim5.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_tim6.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_uart1.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_uart2.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_uart3.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_uart4.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/inc/stm8s_wwdg.h" />
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_clk_GetClockFreq.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_clk_PeripheralClockConfig.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_clk_private.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_gpio_DeInit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_gpio_Init.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_gpio_WriteHigh.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_gpio_WriteLow.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_tim2_ClearFlag.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_tim2_Cmd.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_tim2_DeInit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_tim2_ITConfig.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_tim2_TimeBaseInit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_uart1_Cmd.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_uart1_DeInit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_uart1_GetFlagStatus.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_uart1_ITConfig.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_uart1_Init.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_uart1_ReceiveData8.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="STM8S_StdPeriph_Driver/src/stm8s_uart1_SendData8.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="init.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="init.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="main.h" />
+		<Unit filename="peripheral.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="peripheral.h" />
+		<Unit filename="sha1/basic.h" />
+		<Unit filename="sha1/constants.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sha1/constants.h" />
+		<Unit filename="sha1/hash.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sha1/hash.h" />
+		<Unit filename="sha1/sha1.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sha1/sha1.h" />
+		<Unit filename="sha1/types.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sha1/types.h" />
+		<Unit filename="stm8s_conf.h" />
+		<Unit filename="stm8s_it.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="stm8s_it.h" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
