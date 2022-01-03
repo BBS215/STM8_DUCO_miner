@@ -6,7 +6,7 @@
 #define SERIAL_NUM_ADDR 0x4865 // STM8S - 12 bytes serial
 
 uint8_t g_DUCOID[DUCOID_SIZE+1];
-struct sha1_hasher_s g_hasher;
+struct sha1_hasher_s g_hasher, g_hasher_work;
 uint8_t g_job[JOB_MAXSIZE];
 
 
@@ -29,13 +29,15 @@ uint16_t ducos1a(char * lastblockhash, uint8_t lastblockhash_len, char * newbloc
 
     // Difficulty loop
     if (difficulty > MAX_DIFF) return 0; // If the difficulty is too high
+
+    sha1_hasher_init(&g_hasher);
+    if (sha1_hasher_write(&g_hasher, lastblockhash, lastblockhash_len) != lastblockhash_len) return 0; // error
     for (ducos1res = 0; ducos1res < ((difficulty * 100) + 1); ducos1res++) {
         ret = sprintf(str_buf, "%d", ducos1res);
         if (ret < 1) return 0; // error!
-        sha1_hasher_init(&g_hasher);
-        if (sha1_hasher_write(&g_hasher, lastblockhash, lastblockhash_len) != lastblockhash_len) return 0; // error
-        if (sha1_hasher_write(&g_hasher, str_buf, ret) != ret) return 0; // error
-        hash_bytes = sha1_hasher_gethash(&g_hasher);
+        memcpy(&g_hasher_work, &g_hasher, sizeof(struct sha1_hasher_s));
+        if (sha1_hasher_write(&g_hasher_work, str_buf, ret) != ret) return 0; // error
+        hash_bytes = sha1_hasher_gethash(&g_hasher_work);
         if (memcmp(hash_bytes, g_job, SHA1_HASH_LEN * sizeof(char)) == 0) {
         // If expected hash is equal to the found hash, return the result
             return ducos1res;
@@ -132,8 +134,8 @@ void ducos_loop(void)
         ducos1result = ducos1a(g_lastblockhash, g_lastblockhash_strsize, g_newblockhash, g_newblockhash_strsize, difficulty);
         // Calculate elapsed time
         elapsedTime = (HAL_GetTick_us() - startTime);
-        UART_Flush(); // Clearing the receive buffer before sending the result.
         g_resultstr_size = ducos_make_resultstr(g_resultstr, ducos1result, elapsedTime);
+        UART_Flush(); // Clearing the receive buffer before sending the result.
         UART_send(g_resultstr, g_resultstr_size);
 exit:
         Led_setmode(LED_0, LED_OFF); // Turn off the built-in led
