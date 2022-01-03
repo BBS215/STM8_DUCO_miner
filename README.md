@@ -15,5 +15,6 @@ Tested on STM8S003F3P6 development board: https://www.amazon.com/Development-Min
 Avg hashrate: 264 H/s<br>
 Connect power to 3.3V or 5V or USB, UART TX to PD6, RX to PD5. LED connected to PB5<br>
 
-![STM8S103F3](https://user-images.githubusercontent.com/33000089/147915952-c62dfed8-b33f-4e80-bde3-2dce7908239d.png)<br>
+How to enable UART on Raspberry Pi 4/3/Zero W: https://di-marco.net/blog/it/2020-06-06-raspberry_pi_3_4_and_0_w_serial_port_usage/<br>
 
+![RasPi_connect](https://user-images.githubusercontent.com/33000089/147982746-e581bddf-83df-4fcf-b022-40b286468f01.png)
