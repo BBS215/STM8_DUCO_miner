@@ -26,6 +26,8 @@ void UART_Flush(void);
 bool UART_available(void);
 uint8_t UART_readStringUntil(uint8_t *p_buf, uint8_t buf_max_size, uint8_t c);
 uint32_t UART_strtoul(uint8_t *p_buf, uint8_t buf_size);
+uint8_t UART_ultostr(uint8_t *p_buf, uint8_t max_buf_size, uint32_t value);
+void UART_bytetohex(uint8_t *p_buf, uint8_t value);
 
 #endif // __PERIPHERAL_H
 

@@ -14,7 +14,7 @@ uint8_t g_job[JOB_MAXSIZE];
 uint16_t ducos1a(char * lastblockhash, uint8_t lastblockhash_len, char * newblockhash, uint8_t newblockhash_len, uint16_t difficulty)
 {
     char str_buf[8];
-    int ret;
+    int len;
     uint8_t i, j;
     uint8_t final_len;
     uint8_t *hash_bytes;
@@ -31,12 +31,11 @@ uint16_t ducos1a(char * lastblockhash, uint8_t lastblockhash_len, char * newbloc
     if (difficulty > MAX_DIFF) return 0; // If the difficulty is too high
 
     sha1_hasher_init(&g_hasher);
-    if (sha1_hasher_write(&g_hasher, lastblockhash, lastblockhash_len) != lastblockhash_len) return 0; // error
+    sha1_hasher_write(&g_hasher, lastblockhash, lastblockhash_len);
     for (ducos1res = 0; ducos1res < ((difficulty * 100) + 1); ducos1res++) {
-        ret = sprintf(str_buf, "%d", ducos1res);
-        if (ret < 1) return 0; // error!
+        len = UART_ultostr(str_buf, 8, ducos1res);
         memcpy(&g_hasher_work, &g_hasher, sizeof(struct sha1_hasher_s));
-        if (sha1_hasher_write(&g_hasher_work, str_buf, ret) != ret) return 0; // error
+        sha1_hasher_write(&g_hasher_work, str_buf, len);
         hash_bytes = sha1_hasher_gethash(&g_hasher_work);
         if (memcmp(hash_bytes, g_job, SHA1_HASH_LEN * sizeof(char)) == 0) {
         // If expected hash is equal to the found hash, return the result
@@ -146,8 +145,8 @@ void getClientId(uint8_t *p_ID)
 {
     uint8_t i;
     if (!p_ID) return;
-    sprintf(p_ID, "DUCOID");
-    for(i=0;i<8;i++) sprintf(&(p_ID[6+(i*2)]), "%02X", ((uint8_t*)SERIAL_NUM_ADDR)[i+4]);
+    memcpy(p_ID, "DUCOID", 6);
+    for(i=0;i<8;i++) UART_bytetohex(&(p_ID[6+(i*2)]), ((uint8_t*)SERIAL_NUM_ADDR)[i+4]);
 }
 
 void main(void)

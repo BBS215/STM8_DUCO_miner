@@ -12,7 +12,7 @@
 				<Option type="1" />
 				<Option compiler="sdcc" />
 				<Compiler>
-					<Add option="--opt-code-size" />
+					<Add option="--opt-code-speed" />
 				</Compiler>
 			</Target>
 		</Build>

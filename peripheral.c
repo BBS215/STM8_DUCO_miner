@@ -109,3 +109,30 @@ uint32_t UART_strtoul(uint8_t *p_buf, uint8_t buf_size)
     return ret;
 }
 
+uint8_t UART_ultostr(uint8_t *p_buf, uint8_t max_buf_size, uint32_t value)
+{
+    uint8_t size = 0, tmp;
+    while(size < max_buf_size) {
+        p_buf[max_buf_size-1-size] = (value % 10) + '0';
+        value = value / 10;
+        size++;
+        if (value == 0) break;
+    }
+    if (size < max_buf_size) {
+        tmp = size;
+        while(tmp) {
+            p_buf[size-tmp] = p_buf[max_buf_size-tmp];
+            tmp--;
+        }
+        p_buf[size] = 0;
+    }
+    return size;
+}
+
+void UART_bytetohex(uint8_t *p_buf, uint8_t value)
+{
+    p_buf[0] = (value >> 4) + '0';
+    if (p_buf[0] > '9') p_buf[0] += ('A'-1-'9');
+    p_buf[1] = (value & 0xF) + '0';
+    if (p_buf[1] > '9') p_buf[1] += ('A'-1-'9');
+}
