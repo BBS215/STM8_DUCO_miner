@@ -1,5 +1,18 @@
 #include "main.h"
 
+///////////////////////////////////////////////////////////
+// The higher the hashrate, the higher the difficulty.
+// Because of this, the time it takes to compute the hash increases,
+// and the standard timeout for the AVR may be exceeded. This produces rejected results.
+// To prevent this, an additional delay has been added.
+//#define SLOW_DOWN
+// Without this define, increase the avr_timeout setting in Settings.cfg from 4 to 5 seconds
+///////////////////////////////////////////////////////////
+// At low values of the result, the hashrate drops to 125 H/s.
+// To prevent this, enable this define:
+#define HASHRATE_BUGFIX_153
+///////////////////////////////////////////////////////////
+
 #define MAX_DIFF    655
 #define JOB_MAXSIZE 104 // 40+40+20+3 is the maximum size of a job
 #define DUCOID_SIZE (6+16)
@@ -117,6 +130,7 @@ void ducos_loop(void)
 
     if (UART_available()) {
         Led_setmode(LED_0, LED_ON); // Turn on the built-in led
+restart:
         // Read last block hash
 	    g_lastblockhash_strsize = UART_readStringUntil(g_lastblockhash, 64, ',');
 	    if (g_lastblockhash_strsize == 0) goto exit;
@@ -125,6 +139,7 @@ void ducos_loop(void)
 	    if (g_newblockhash_strsize == 0) goto exit;
         // Read difficulty
 	    g_difficultystr_size = UART_readStringUntil(g_difficultystr, 5, ',');
+	    UART_Flush();
 	    if (g_difficultystr_size == 0) goto exit;
         difficulty = UART_strtoul(g_difficultystr, g_difficultystr_size);
         // Start time measurement
@@ -133,7 +148,16 @@ void ducos_loop(void)
         ducos1result = ducos1a(g_lastblockhash, g_lastblockhash_strsize, g_newblockhash, g_newblockhash_strsize, difficulty);
         // Calculate elapsed time
         elapsedTime = (HAL_GetTick_us() - startTime);
+#ifdef SLOW_DOWN
+        HAL_Delay_us((uint32_t)ducos1result*(uint32_t)1400);
+        elapsedTime += ((uint32_t)ducos1result*(uint32_t)1400);
+#else
+ #ifdef HASHRATE_BUGFIX_153
+        if ((ducos1result > 0) && (ducos1result < 15)) elapsedTime -= (((uint16_t)15-ducos1result)*280); // Fix hashrate for low result values
+ #endif // HASHRATE_BUGFIX_151
+#endif // SLOW_DOWN
         g_resultstr_size = ducos_make_resultstr(g_resultstr, ducos1result, elapsedTime);
+        if (UART_available()) goto restart;
         UART_Flush(); // Clearing the receive buffer before sending the result.
         UART_send(g_resultstr, g_resultstr_size);
 exit:
@@ -158,14 +182,11 @@ void main(void)
 	Leds_init();
 	UART_init();
 	getClientId(g_DUCOID);
-	UART_Flush();
 	enableInterrupts();
+	UART_Flush();
 
 	while(1)
 	{
 	    ducos_loop();
 	}
 }
-
-
-

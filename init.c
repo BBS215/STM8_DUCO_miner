@@ -44,7 +44,7 @@ void HAL_Delay_ms(uint32_t Delay_ms)
 
   while((HAL_GetTick_ms() - tickstart) < Delay_ms) { nop(); }
 }
-
+*/
 void HAL_Delay_us(uint32_t Delay_us)
 {
     uint32_t tickstart = HAL_GetTick_us();
@@ -52,4 +52,4 @@ void HAL_Delay_us(uint32_t Delay_us)
 
   while((HAL_GetTick_us() - tickstart) < Delay_us) { nop(); }
 }
-*/
+
