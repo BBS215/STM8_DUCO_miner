@@ -12,8 +12,9 @@ Program with STLink or other programmer supporting SWIM protocol.<br>
 ST Visual Programmer: https://www.st.com/en/development-tools/stvp-stm8.html
 
 Tested on STM8S003F3P6 development board: https://www.amazon.com/Development-Minimum-System-STM8S003F3P6-Module/dp/B07L178DKC<br>
-Avg hashrate: 264 H/s<br>
+Avg hashrate: 260 H/s<br>
 Connect power to 3.3V or 5V or USB, UART TX to PD6, RX to PD5. LED connected to PB5<br>
+Increase the avr_timeout setting in Settings.cfg from 4 to 5 seconds.<br>
 
 How to enable UART on Raspberry Pi 4/3/Zero W: https://di-marco.net/blog/it/2020-06-06-raspberry_pi_3_4_and_0_w_serial_port_usage/<br>
 
